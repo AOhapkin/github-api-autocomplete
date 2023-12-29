@@ -1,5 +1,6 @@
 const searchInput = document.querySelector('.search-input');
 const hintsList = document.querySelector('.search-autocomplete');
+let currentRepositories = [];
 
 searchInput.addEventListener('input', debounce(function(evt) {
   hintsList.textContent = '';
@@ -16,20 +17,25 @@ searchInput.addEventListener('input', debounce(function(evt) {
 function showSearchHints(repositories) {
   const fragment = document.createDocumentFragment();
   repositories.forEach(rep => {
+    currentRepositories.push(rep);
     const listItem = document.createElement('li');
     listItem.classList.add('autocomplete-hint');
     listItem.textContent = rep.name;
     listItem.addEventListener('click', () => {
       clearHintsList();
+      // pinRepo()
     });
     fragment.append(listItem);
   });
   hintsList.append(fragment);
+  console.log(currentRepositories)
 }
 
 function clearHintsList() {
   hintsList.textContent = '';
   searchInput.value = '';
+  currentRepositories = [];
+  console.log(currentRepositories)
 }
 
 function debounce(fn, debounceTime) {
