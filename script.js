@@ -1,13 +1,25 @@
-// источник https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore?tab=readme-ov-file#_debounce
-function debounce(func, wait, immediate) {
-  var timeout;
+const searchInput = document.querySelector('.search-input');
+
+searchInput.addEventListener('input', debounce(function(evt) {
+  const searchValue = evt.target.value.trim();
+  if (searchValue.length > 0) {
+    fetch(`https://api.github.com/search/repositories?q="${evt.target.value}";per_page=5`)
+      .then(resp => resp.json())
+      .then(repositories => console.log(repositories.items))
+  } else {
+    searchInput.value = '';
+  }
+}, 800));
+
+function debounce(fn, debounceTime) {
+  let timeout;
+
   return function() {
-  	var context = this, args = arguments;
+  	const context = this; 
+    const args = arguments;
   	clearTimeout(timeout);
-  	if (immediate && !timeout) func.apply(context, args);
-  	timeout = setTimeout(function() {
-  		timeout = null;
-  		if (!immediate) func.apply(context, args);
-  	}, wait);
+    timeout = setTimeout(function() {
+      fn.apply(context, args);
+    }, debounceTime);
   };
 }
