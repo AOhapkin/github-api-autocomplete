@@ -3,18 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>github-api-autocomplete</title>
 </head>
 <body>
   <div class="wrapper">
     <form class="search-form">
-      <input class="search-input" type="text" name="search" id="search">
-      <ul class="search-autocomplete">
-        <li class="autocomplete-hint"></li>
+      <input class="search-input" type="text" name="search" id="search" placeholder="Type here...">
+      <ul class="autocomplete">
+        <li class="autocomplete__item">Redux</li>
+        <li class="autocomplete__item">Redux-thunk</li>
+        <li class="autocomplete__item">Redux-actions</li>
+        <li class="autocomplete__item">React-redux</li>
+        <li class="autocomplete__item">Redux-saga</li>
       </ul>
     </form>
     <ul class="results">
-      <li></li>
+      <li class="results__item">
+        <p class="results__text">Name: react</p>
+        <p class="results__text">Owner: facebook</p>
+        <p class="results__text">Stars: 145231</p>
+        <button class="results__delete-button"></button>
+      </li>
+      <li class="results__item">
+        <p class="results__text">Name: angular</p>
+        <p class="results__text">Owner: angular</p>
+        <p class="results__text">Stars: 59457</p>
+        <button class="results__delete-button"></button>
+      </li>
+      <li class="results__item">
+        <p class="results__text">Name: vue</p>
+        <p class="results__text">Owner: vuejs</p>
+        <p class="results__text">Stars: 160897</p>
+        <button class="results__delete-button"></button>
+      </li>
     </ul>
   </div>
   <script src="script.js"></script>

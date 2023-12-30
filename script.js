@@ -1,5 +1,5 @@
 const searchInput = document.querySelector('.search-input');
-const hintsList = document.querySelector('.search-autocomplete');
+const hintsList = document.querySelector('.autocomplete');
 let currentRepositories = [];
 
 searchInput.addEventListener('input', debounce(function(evt) {
@@ -19,7 +19,7 @@ function showSearchHints(repositories) {
   repositories.forEach(rep => {
     currentRepositories.push(rep);
     const listItem = document.createElement('li');
-    listItem.classList.add('autocomplete-hint');
+    listItem.classList.add('autocomplete__item');
     listItem.textContent = rep.name;
     listItem.addEventListener('click', () => {
       clearHintsList();
