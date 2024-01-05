@@ -1,5 +1,6 @@
 const searchInput = document.querySelector('.search-input');
 const hintsList = document.querySelector('.autocomplete');
+const resultsList = document.querySelector('.results');
 let currentRepositories = [];
 
 searchInput.addEventListener('input', debounce(function(evt) {
@@ -30,23 +31,56 @@ function showSearchHints(repositories) {
     fragment.append(listItem);
   });
   hintsList.append(fragment);
-  console.log(currentRepositories)
 }
 
 function pinRepo(hintsElement) {
+  const elementId = hintsElement.getAttribute('id');
+  const repositoryData = getCurrentRepositoryById(elementId);
+  // li
   const cardElement = document.createElement('li');
   cardElement.classList.add('results__item');
-  const elementId = hintsElement.getAttribute('id');
-  console.log('here')
-  console.log(cardElement)
-  console.log(elementId)
+  // name
+  const repositoryNameElement = document.createElement('p');
+  repositoryNameElement.classList.add('results__text');
+  repositoryNameElement.textContent = 'Name: ' + repositoryData.name;
+  // owner
+  const repositoryOwnerElement = document.createElement('p');
+  repositoryOwnerElement.classList.add('results__text');
+  repositoryOwnerElement.textContent = 'Owner: ' + repositoryData.owner;
+  // stars
+  const repositoryStarsElement = document.createElement('p');
+  repositoryStarsElement.classList.add('results__text');
+  repositoryStarsElement.textContent = 'Stars: ' + repositoryData.stars;
+  // delete button
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.classList.add('results__delete-button');
+  // fill
+  cardElement.append(repositoryNameElement);
+  cardElement.append(repositoryOwnerElement);
+  cardElement.append(repositoryStarsElement);
+  cardElement.append(deleteButtonElement);
+  // add card
+  resultsList.append(cardElement);
+}
+
+function getCurrentRepositoryById(repositoryId) {
+  let result;
+  currentRepositories.forEach(rep => {
+    if (rep.id == repositoryId) {
+      result = {
+        name: rep.name,
+        owner: rep.owner.login,
+        stars: rep.stargazers_count
+      };
+    }
+  });
+  return result;
 }
 
 function clearHintsList() {
   hintsList.textContent = '';
   searchInput.value = '';
   currentRepositories = [];
-  console.log(currentRepositories)
 }
 
 function debounce(fn, debounceTime) {
