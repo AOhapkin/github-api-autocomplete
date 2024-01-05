@@ -21,14 +21,25 @@ function showSearchHints(repositories) {
     const listItem = document.createElement('li');
     listItem.classList.add('autocomplete__item');
     listItem.textContent = rep.name;
-    listItem.addEventListener('click', () => {
+    listItem.setAttribute('id', rep.id);
+    listItem.addEventListener('click', (evt) => {
+      let target = evt.target;
+      pinRepo(target);
       clearHintsList();
-      // pinRepo()
     });
     fragment.append(listItem);
   });
   hintsList.append(fragment);
   console.log(currentRepositories)
+}
+
+function pinRepo(hintsElement) {
+  const cardElement = document.createElement('li');
+  cardElement.classList.add('results__item');
+  const elementId = hintsElement.getAttribute('id');
+  console.log('here')
+  console.log(cardElement)
+  console.log(elementId)
 }
 
 function clearHintsList() {
