@@ -15,6 +15,15 @@ searchInput.addEventListener('input', debounce(function(evt) {
   }
 }, 800));
 
+resultsList.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('results__delete-button')) {
+    console.log('delete button');
+    console.log(evt.target.parentNode);
+    const card = evt.target.parentNode;
+    card.remove();
+  }
+})
+
 function showSearchHints(repositories) {
   const fragment = document.createDocumentFragment();
   repositories.forEach(rep => {
