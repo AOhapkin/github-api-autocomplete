@@ -17,8 +17,6 @@ searchInput.addEventListener('input', debounce(function(evt) {
 
 resultsList.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('results__delete-button')) {
-    console.log('delete button');
-    console.log(evt.target.parentNode);
     const card = evt.target.parentNode;
     card.remove();
   }
